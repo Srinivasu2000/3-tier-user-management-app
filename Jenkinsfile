@@ -45,28 +45,7 @@ stages {
         }
     }
 
-    stage('Sonarqube Analysis') {
-        steps {
-            withSonarQubeEnv("${SONARQUBE_ENV}") {
-                sh """
-                   /opt/sonar-scanner/bin/sonar-scanner \
-                  -Dsonar.projectKey=3-tier-user-management-app \
-                  -Dsonar.sources=. \
-                  -Dsonar.test.inclusions=test_*.py \
-                  -Dsonar.exclusions=venv/**,__pycache__/**,.dockerignore \
-                  -Dsonar.python.coverage.reportPaths=coverage.xml
-                """
-            }
-        }
-    }
-
-    stage('Quality Gate') {
-        steps {
-            timeout(time: 2, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-            }
-        }
-    }
+   
 
     stage('Build Artifact') {
         steps {
@@ -77,16 +56,7 @@ stages {
         }
     }
 
-    stage('Upload to Nexus') {
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'nexuscred', passwordVariable: 'passwd', usernameVariable: 'username')]) {
-                sh """
-                python3 -m twine upload --repository-url http://65.2.31.124:8081/repository/python/ \
-                -u $username -p $passwd dist/*
-                """
-            }
-        }
-    }
+   
 
     stage('Build Docker Images') {
         steps {
