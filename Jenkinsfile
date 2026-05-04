@@ -2,14 +2,14 @@ pipeline {
 agent any
 
 environment {
-    DOCKERHUB_USER    = 'sauravnirala'
+    DOCKERHUB_USER    = 'srinivasu56'
     TODO_REPO         = 'usermanagement'
     IMAGE_TAG         = "${env.BUILD_NUMBER}"
 
     TODO_IMAGE        = "${DOCKERHUB_USER}/${TODO_REPO}:${IMAGE_TAG}"
     TODO_LATEST       = "${DOCKERHUB_USER}/${TODO_REPO}:latest"
 
-    GIT_REPO_URL      = 'https://github.com/sauravnirala/3-tier-user-management-app.git'
+    GIT_REPO_URL      = 'https://github.com/Srinivasu2000/3-tier-user-management-app.git'
     GIT_BRANCH        = 'master'
 
     K8S_NAMESPACE     = 'userapp'
