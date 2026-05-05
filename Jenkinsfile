@@ -88,7 +88,7 @@ stages {
         steps {
             echo "Logging in to DockerHub as ${DOCKERHUB_USER}..."
             withCredentials([usernamePassword(
-                credentialsId: 'dockerhub',
+                credentialsId: 'docker-cred',
                 usernameVariable: 'DOCKER_USER',
                 passwordVariable: 'DOCKER_PASS'
             )]) {
